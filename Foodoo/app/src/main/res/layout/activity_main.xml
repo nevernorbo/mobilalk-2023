@@ -13,8 +13,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:ems="10"
-        android:hint="Név"
-        android:inputType="text"
+        android:hint="E-mail cím"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:backgroundTint="#9C27B0"
         android:onClick="login"
         android:text="Bejelentkezés"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:backgroundTint="#9C27B0"
         android:onClick="register"
         android:text="Regisztráció"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,5 +81,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656" />
+
+    <Button
+        android:id="@+id/guestLoginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#673AB7"
+        android:onClick="loginAsGuest"
+        android:text="Bejelentekezés vendégként "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
+
+    <Button
+        android:id="@+id/googleSignInButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#673AB7"
+        android:onClick="loginWithGoogle"
+        android:text="Bejelentkezés google fiókkal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guestLoginButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
