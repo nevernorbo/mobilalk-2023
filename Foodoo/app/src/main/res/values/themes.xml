@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.Foodoo" parent="Base.Theme.Foodoo" />
+
+    <style name="ItemDetailText" parent="TextAppearance.AppCompat.Subhead"/>
+    <style name="ItemTitle" parent="TextAppearance.AppCompat.Headline"/>
+    <style name="ItemDetailTitle" parent="TextAppearance.AppCompat.Headline"/>
 </resources>

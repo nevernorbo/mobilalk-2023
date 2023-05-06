@@ -26,7 +26,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final int SECRET_KEY = 99;
-    private static final int RC_SIGN_IN = 1234;
+    private static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToFoods() {
         Intent intent = new Intent(this, FoodsActivity.class);
-        intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
     }
 

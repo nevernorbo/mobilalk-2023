@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">Foodoo</string>
+
+    <string-array name="food_item_names">
+        <item>Giga alma</item>
+        <item>Gyros</item>
+        <item>Coca cola</item>
+        <item>Banan</item>
+        <item>Juice</item>
+    </string-array>
+
+    <string-array name="food_item_calories">
+        <item>200</item>
+        <item>400</item>
+        <item>150</item>
+        <item>300</item>
+        <item>80</item>
+    </string-array>
+
+    <array name="food_item_rates">
+        <item>3.5</item>
+        <item>5</item>
+        <item>4</item>
+        <item>1.5</item>
+        <item>5</item>
+    </array>
+
+    <string-array name="food_item_price">
+        <item>100</item>
+        <item>150</item>
+        <item>500</item>
+        <item>300</item>
+        <item>510</item>
+    </string-array>
 </resources>

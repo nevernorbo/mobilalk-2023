@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/foodItemName"
+            style="@style/ItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:padding="8dp"
+            android:text="Név"
+            android:textColor="?android:textColorSecondary" />
+
+        <TextView
+            android:id="@+id/calorieValue"
+            style="@style/ItemDetailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/foodItemName"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="200dp"
+            android:layout_marginBottom="12dp"
+            android:padding="8dp"
+            android:text="Kalória"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/foodItemPrice"
+            style="@style/ItemDetailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="30dp"
+            android:padding="8dp"
+            android:text="Ár" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="120dp"
+            android:isIndicator="true"
+            android:numStars="5" />
+
+        <Button
+            android:id="@+id/add_to_daily_intake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingBar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="-31dp"
+            android:layout_marginEnd="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Étrendbe" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
