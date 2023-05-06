@@ -6,6 +6,9 @@ public class FoodItem {
     private String price;
     private float ratedInfo;
 
+    public FoodItem() {
+    }
+
     public FoodItem(String name, String calories, String price, float ratedInfo) {
         this.name = name;
         this.calories = calories;

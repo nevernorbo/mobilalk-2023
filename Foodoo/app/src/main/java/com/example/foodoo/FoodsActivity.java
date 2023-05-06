@@ -19,8 +19,13 @@ import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -29,7 +34,11 @@ import static android.view.View.VISIBLE;
 
 public class FoodsActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
+
+    // Firebase
     private FirebaseUser user;
+    private FirebaseFirestore mFirestore;
+    private CollectionReference mItems;
 
     private RecyclerView mRecyclerView;
     private ArrayList<FoodItem> mItemList;
@@ -42,6 +51,7 @@ public class FoodsActivity extends AppCompatActivity {
     private FrameLayout redCircle;
     private TextView countTextView;
     private int dailyIntakeItems = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +73,27 @@ public class FoodsActivity extends AppCompatActivity {
         mFoodItemAdapter = new FoodItemAdapter(this, mItemList);
         mRecyclerView.setAdapter(mFoodItemAdapter);
 
-        initializeData();
+        mFirestore = FirebaseFirestore.getInstance();
+        mItems = mFirestore.collection("Items");
+
+        queryData();
+    }
+
+    private void queryData() {
+        mItemList.clear();
+
+        mItems.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+           for (QueryDocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
+               FoodItem item = documentSnapshot.toObject(FoodItem.class);
+               mItemList.add(item);
+           }
+           if (mItemList.size() == 0) {
+               initializeData();
+               queryData();
+           }
+
+           mFoodItemAdapter.notifyDataSetChanged();
+        });
     }
 
     private void initializeData() {
@@ -72,13 +102,9 @@ public class FoodsActivity extends AppCompatActivity {
         String[] foodItemPrices = getResources().getStringArray(R.array.food_item_price);
         TypedArray foodItemRates = getResources().obtainTypedArray(R.array.food_item_rates);
 
-        mItemList.clear();
-
         for (int i = 0; i < foodItemNames.length; i++) {
-            mItemList.add(new FoodItem(foodItemNames[i], foodItemCalories[i], foodItemPrices[i], foodItemRates.getFloat(i, 0)));
+            mItems.add(new FoodItem(foodItemNames[i], foodItemCalories[i], foodItemPrices[i], foodItemRates.getFloat(i, 0)));
         }
-
-        mFoodItemAdapter.notifyDataSetChanged();
     }
 
     @Override
