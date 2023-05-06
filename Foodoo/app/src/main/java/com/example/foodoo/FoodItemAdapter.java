@@ -101,14 +101,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mItemCalories = itemView.findViewById(R.id.calorieValue);
             mItemPrice = itemView.findViewById(R.id.foodItemPrice);
             mRatingBar = itemView.findViewById(R.id.ratingBar);
-
-            itemView.findViewById(R.id.add_to_daily_intake).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("Activity", "Add to daily intake clicked");
-                    ((FoodsActivity)mContext).updateAlertIcon();
-                }
-            });
         }
 
         public void bindTo(FoodItem currentItem) {
@@ -116,6 +108,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mItemCalories.setText(currentItem.getCalories() + " kcal");
             mItemPrice.setText(currentItem.getPrice() + " Ft");
             mRatingBar.setRating(currentItem.getRatedInfo());
+
+            itemView.findViewById(R.id.add_to_daily_intake).setOnClickListener(view -> ((FoodsActivity)mContext).updateAlertIcon(currentItem));
+            itemView.findViewById(R.id.delete_food).setOnClickListener(view -> ((FoodsActivity)mContext).deleteFood(currentItem));
         }
     }
 }

@@ -1,19 +1,22 @@
 package com.example.foodoo;
 
 public class FoodItem {
+    private String id;
     private String name;
     private String calories;
     private String price;
     private float ratedInfo;
+    private int storedCount;
 
     public FoodItem() {
     }
 
-    public FoodItem(String name, String calories, String price, float ratedInfo) {
+    public FoodItem(String name, String calories, String price, float ratedInfo, int storedCount) {
         this.name = name;
         this.calories = calories;
         this.price = price;
         this.ratedInfo = ratedInfo;
+        this.storedCount = storedCount;
     }
 
     public String getName() {
@@ -46,5 +49,17 @@ public class FoodItem {
 
     public void setRatedInfo(float ratedInfo) {
         this.ratedInfo = ratedInfo;
+    }
+
+    public int getStoredCount() {
+        return storedCount;
+    }
+
+    public String _getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

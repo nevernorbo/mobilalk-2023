@@ -18,12 +18,15 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -82,9 +85,10 @@ public class FoodsActivity extends AppCompatActivity {
     private void queryData() {
         mItemList.clear();
 
-        mItems.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        mItems.orderBy("storedCount", Query.Direction.DESCENDING).limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
            for (QueryDocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
                FoodItem item = documentSnapshot.toObject(FoodItem.class);
+               item.setId(documentSnapshot.getId());
                mItemList.add(item);
            }
            if (mItemList.size() == 0) {
@@ -103,7 +107,7 @@ public class FoodsActivity extends AppCompatActivity {
         TypedArray foodItemRates = getResources().obtainTypedArray(R.array.food_item_rates);
 
         for (int i = 0; i < foodItemNames.length; i++) {
-            mItems.add(new FoodItem(foodItemNames[i], foodItemCalories[i], foodItemPrices[i], foodItemRates.getFloat(i, 0)));
+            mItems.add(new FoodItem(foodItemNames[i], foodItemCalories[i], foodItemPrices[i], foodItemRates.getFloat(i, 0), 0));
         }
     }
 
@@ -184,13 +188,39 @@ public class FoodsActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    public void updateAlertIcon() {
-        dailyIntakeItems = dailyIntakeItems + 1;
+    public void updateAlertIcon(FoodItem item) {
+        dailyIntakeItems++;
         if (dailyIntakeItems > 0) {
             countTextView.setText(String.valueOf(dailyIntakeItems));
         } else {
             countTextView.setText("");
         }
         redCircle.setVisibility((dailyIntakeItems > 0) ? VISIBLE : GONE);
+
+        mItems.document(item._getId()).update("storedCount", item.getStoredCount() + 1).addOnFailureListener(failure -> {
+                Toast.makeText(this, item.getName() + " cannot be changed.", Toast.LENGTH_LONG).show();
+        });
+
+        queryData();
+    }
+
+    public void deleteFood(FoodItem item) {
+        DocumentReference reference = mItems.document(item._getId());
+
+        reference.delete().addOnSuccessListener(success -> {
+            Toast.makeText(this, item.getName() + " deleted.", Toast.LENGTH_LONG).show();
+
+            dailyIntakeItems -= item.getStoredCount();
+            if (dailyIntakeItems > 0) {
+                countTextView.setText(String.valueOf(dailyIntakeItems));
+            } else {
+                countTextView.setText("");
+            }
+            redCircle.setVisibility((dailyIntakeItems > 0) ? VISIBLE : GONE);
+        }).addOnFailureListener(failure -> {
+            Toast.makeText(this, item.getName() + " cannot be deleted!", Toast.LENGTH_LONG).show();
+        });
+
+        queryData();
     }
 }
