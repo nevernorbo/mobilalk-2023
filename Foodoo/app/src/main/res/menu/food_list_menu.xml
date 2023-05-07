@@ -6,35 +6,24 @@
         android:icon="@drawable/baseline_search"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always">
-    </item>
+        app:showAsAction="always"></item>
 
     <item
         android:id="@+id/daily_intake"
         android:icon="@drawable/baseline_food_bank_24"
         android:title="Daily intake"
         app:actionLayout="@layout/custom_menu_item"
-        app:showAsAction="always">
-    </item>
-
-    <item
-        android:id="@+id/view_selector"
-        android:icon="@drawable/baseline_grid_view_24"
-        android:title="Search"
-        app:showAsAction="always">
-    </item>
+        app:showAsAction="always"></item>
 
     <item
         android:id="@+id/setting_button"
         android:orderInCategory="1"
         android:title="Beállítások"
-        app:showAsAction="never">
-    </item>
+        app:showAsAction="never"></item>
 
     <item
         android:id="@+id/logoutButton"
         android:orderInCategory="2"
         android:title="Kijelentkezés"
-        app:showAsAction="never">
-    </item>
+        app:showAsAction="never"></item>
 </menu>

@@ -80,14 +80,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    goToFoods();
-                } else {
-                    Toast.makeText(MainActivity.this, "Failed to log in: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                goToFoods();
+            } else {
+                Toast.makeText(MainActivity.this, "Failed to log in: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -96,14 +93,11 @@ public class MainActivity extends AppCompatActivity {
         String username = usernameET.getText().toString();
         String password = passwordET.getText().toString();
 
-        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    goToFoods();
-                } else {
-                    Toast.makeText(MainActivity.this, "Failed to log in: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                goToFoods();
+            } else {
+                Toast.makeText(MainActivity.this, "Failed to log in: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -120,14 +114,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginAsGuest(View view) {
-        mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    goToFoods();
-                } else {
-                    Toast.makeText(MainActivity.this, "Failed to log in anonymously: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
+        mAuth.signInAnonymously().addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                goToFoods();
+            } else {
+                Toast.makeText(MainActivity.this, "Failed to log in anonymously: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

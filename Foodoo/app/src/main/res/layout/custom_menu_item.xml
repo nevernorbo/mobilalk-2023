@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:background="?attr/selectableItemBackgroundBorderless"/>
+        android:background="?attr/selectableItemBackgroundBorderless" />
 
     <FrameLayout
         android:layout_width="32dp"
@@ -19,7 +19,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:src="@drawable/baseline_food_bank_24"/>
+            android:src="@drawable/baseline_food_bank_24" />
 
         <FrameLayout
             android:id="@+id/view_alert_red_circle"
@@ -35,9 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="0"
                 android:textColor="@color/white"
-                android:textSize="10sp"
-                android:text="0"/>
+                android:textSize="10sp" />
         </FrameLayout>
     </FrameLayout>
 </FrameLayout>

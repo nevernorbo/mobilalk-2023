@@ -1,13 +1,8 @@
 package com.example.foodoo;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
-import android.annotation.SuppressLint;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -15,7 +10,6 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,7 +17,12 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -31,12 +30,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 public class FoodsActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
@@ -53,9 +48,6 @@ public class FoodsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ArrayList<FoodItem> mItemList;
     private FoodItemAdapter mFoodItemAdapter;
-
-    private int gridNumber = 1;
-    private boolean viewRow = true;
 
 
     private FrameLayout redCircle;
@@ -77,7 +69,7 @@ public class FoodsActivity extends AppCompatActivity {
         }
 
         mRecyclerView = findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, gridNumber));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         mItemList = new ArrayList<>();
 
         mFoodItemAdapter = new FoodItemAdapter(this, mItemList);
@@ -106,17 +98,17 @@ public class FoodsActivity extends AppCompatActivity {
         mItemList.clear();
 
         mItems.orderBy("storedCount", Query.Direction.DESCENDING).limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
-           for (QueryDocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
-               FoodItem item = documentSnapshot.toObject(FoodItem.class);
-               item.setId(documentSnapshot.getId());
-               mItemList.add(item);
-           }
-           if (mItemList.size() == 0) {
-               initializeData();
-               queryData();
-           }
+            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                FoodItem item = documentSnapshot.toObject(FoodItem.class);
+                item.setId(documentSnapshot.getId());
+                mItemList.add(item);
+            }
+            if (mItemList.size() == 0) {
+                initializeData();
+                queryData();
+            }
 
-           mFoodItemAdapter.notifyDataSetChanged();
+            mFoodItemAdapter.notifyDataSetChanged();
         });
     }
 
@@ -153,10 +145,10 @@ public class FoodsActivity extends AppCompatActivity {
         });
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        Log.d(LOG_TAG, "Kurva anyad");
         if (itemId == R.id.logoutButton) {
             Log.d(LOG_TAG, "Log out clicked");
             FirebaseAuth.getInstance().signOut();
@@ -168,24 +160,9 @@ public class FoodsActivity extends AppCompatActivity {
         } else if (itemId == R.id.daily_intake) {
             Log.d(LOG_TAG, "Daily intake clicked");
             return true;
-        } else if (itemId == R.id.view_selector) {
-            Log.d(LOG_TAG, "View selector clicked");
-            if (viewRow) {
-                changeSpanCount(item, R.drawable.baseline_view_stream_24, 1);
-            } else {
-                changeSpanCount(item, R.drawable.baseline_grid_view_24, 2);
-            }
-            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void changeSpanCount(MenuItem item, int drawableId, int spanCount) {
-        viewRow = !viewRow;
-        item.setIcon(drawableId);
-        GridLayoutManager layoutManager = (GridLayoutManager) mRecyclerView.getLayoutManager();
-        layoutManager.setSpanCount(spanCount);
     }
 
     @Override
@@ -218,11 +195,11 @@ public class FoodsActivity extends AppCompatActivity {
         redCircle.setVisibility((dailyIntakeItems > 0) ? VISIBLE : GONE);
 
         mItems.document(item._getId()).update("storedCount", item.getStoredCount() + 1).addOnFailureListener(failure -> {
-                Toast.makeText(this, item.getName() + " cannot be changed.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, item.getName() + " cannot be changed.", Toast.LENGTH_LONG).show();
         });
 
         StringBuilder messageBuilder = new StringBuilder();
-        for (FoodItem foodItem: mItemList) {
+        for (FoodItem foodItem : mItemList) {
             if (foodItem.getStoredCount() > 0) {
                 messageBuilder.append(foodItem.getName()).append(" x ").append(foodItem.getStoredCount()).append(", ");
             }

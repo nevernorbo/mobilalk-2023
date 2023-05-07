@@ -106,7 +106,7 @@
         android:layout_marginEnd="20dp"
         android:backgroundTint="#673AB7"
         android:onClick="loginWithGoogle"
-        android:text="Bejelentkezés google fiókkal"
+        android:text="Bejelentkezés Google fiókkal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
