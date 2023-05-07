@@ -25,6 +25,7 @@
             android:text="Név"
             android:textColor="?android:textColorSecondary" />
 
+
         <TextView
             android:id="@+id/calorieValue"
             style="@style/ItemDetailText"
@@ -34,38 +35,33 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="-1dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="240dp"
             android:layout_marginBottom="12dp"
             android:padding="8dp"
             android:text="Kalória"
             android:textColor="@color/red" />
 
-
         <TextView
             android:id="@+id/foodItemPrice"
             style="@style/ItemDetailText"
-            android:layout_width="wrap_content"
+            android:layout_width="129dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/foodItemName"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="186dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="174dp"
+            android:layout_marginTop="5dp"
             android:padding="8dp"
             android:text="Ár" />
 
         <Button
             android:id="@+id/delete_added_food"
-            android:layout_width="wrap_content"
+            android:layout_width="43dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/storedFoodCount"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="-80dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="35dp"
-            android:layout_toEndOf="@+id/foodItemPrice"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="33dp"
             android:backgroundTint="#E91E63"
             android:drawableLeft="@drawable/baseline_delete_outline_24"
             android:paddingLeft="10dp"
@@ -73,16 +69,16 @@
 
         <TextView
             android:id="@+id/storedFoodCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_width="84dp"
+            android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="320dp"
+            android:layout_marginStart="11dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginEnd="6dp"
+            android:layout_toEndOf="@+id/foodItemPrice"
             android:text="TextView"
-            android:textSize="16dp" />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
