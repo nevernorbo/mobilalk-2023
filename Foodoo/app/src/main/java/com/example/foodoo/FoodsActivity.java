@@ -6,6 +6,8 @@ import static android.view.View.VISIBLE;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
@@ -97,7 +99,7 @@ public class FoodsActivity extends AppCompatActivity {
     private void queryData() {
         mItemList.clear();
 
-        mItems.orderBy("storedCount", Query.Direction.DESCENDING).limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        mItems.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 FoodItem item = documentSnapshot.toObject(FoodItem.class);
                 item.setId(documentSnapshot.getId());
@@ -125,7 +127,6 @@ public class FoodsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d(LOG_TAG, "OnCreateOptionsMenu is called");
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.food_list_menu, menu);
         MenuItem menuItem = menu.findItem(R.id.search_bar);
@@ -159,10 +160,18 @@ public class FoodsActivity extends AppCompatActivity {
             return true;
         } else if (itemId == R.id.daily_intake) {
             Log.d(LOG_TAG, "Daily intake clicked");
+            item.getActionView().findViewById(R.id.daily_intake).setOnClickListener(view -> {
+            goToStoredFoods(this);
+            });
             return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void goToStoredFoods(Context context) {
+        Intent intent = new Intent(context, IntakeActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
@@ -195,7 +204,7 @@ public class FoodsActivity extends AppCompatActivity {
         redCircle.setVisibility((dailyIntakeItems > 0) ? VISIBLE : GONE);
 
         mItems.document(item._getId()).update("storedCount", item.getStoredCount() + 1).addOnFailureListener(failure -> {
-            Toast.makeText(this, item.getName() + " cannot be changed.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, item.getName() + " nem változtatható meg.", Toast.LENGTH_LONG).show();
         });
 
         StringBuilder messageBuilder = new StringBuilder();
@@ -217,7 +226,7 @@ public class FoodsActivity extends AppCompatActivity {
         DocumentReference reference = mItems.document(item._getId());
 
         reference.delete().addOnSuccessListener(success -> {
-            Toast.makeText(this, item.getName() + " deleted.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, item.getName() + " törölve lett.", Toast.LENGTH_LONG).show();
 
             dailyIntakeItems -= item.getStoredCount();
             if (dailyIntakeItems > 0) {
@@ -227,7 +236,7 @@ public class FoodsActivity extends AppCompatActivity {
             }
             redCircle.setVisibility((dailyIntakeItems > 0) ? VISIBLE : GONE);
         }).addOnFailureListener(failure -> {
-            Toast.makeText(this, item.getName() + " cannot be deleted!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, item.getName() + " nem törölhető!", Toast.LENGTH_LONG).show();
         });
 
         queryData();

@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     goToFoods();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Error in creating new user with email and password: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Hiba a felhasználó létrehozásakor: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
