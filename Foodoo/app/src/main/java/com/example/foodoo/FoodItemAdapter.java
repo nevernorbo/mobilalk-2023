@@ -69,8 +69,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (FoodItem item:
-                     mFoodItemArrayListAll) {
+                for (FoodItem item :
+                        mFoodItemArrayListAll) {
                     if (item.getName().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
@@ -109,8 +109,13 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ViewHo
             mItemPrice.setText(currentItem.getPrice() + " Ft");
             mRatingBar.setRating(currentItem.getRatedInfo());
 
-            itemView.findViewById(R.id.add_to_daily_intake).setOnClickListener(view -> ((FoodsActivity)mContext).updateAlertIcon(currentItem));
-            itemView.findViewById(R.id.delete_food).setOnClickListener(view -> ((FoodsActivity)mContext).deleteFood(currentItem));
+            itemView.findViewById(R.id.add_to_daily_intake).setOnClickListener(view -> {
+                ((FoodsActivity) mContext).updateAlertIcon(currentItem);
+
+                Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.add_to_daily_intake_animation);
+                itemView.startAnimation(animation);
+            });
+            itemView.findViewById(R.id.delete_food).setOnClickListener(view -> ((FoodsActivity) mContext).deleteFood(currentItem));
         }
     }
 }
