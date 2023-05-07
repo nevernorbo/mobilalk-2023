@@ -37,7 +37,6 @@ public class IntakeActivity extends AppCompatActivity {
     private IntakeItemAdapter mIntakeItemAdapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +66,7 @@ public class IntakeActivity extends AppCompatActivity {
     private void queryData() {
         mItemList.clear();
 
-        mItems.orderBy("storedCount", Query.Direction.DESCENDING).limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        mItems.orderBy("storedCount", Query.Direction.DESCENDING).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 FoodItem item = documentSnapshot.toObject(FoodItem.class);
                 item.setId(documentSnapshot.getId());

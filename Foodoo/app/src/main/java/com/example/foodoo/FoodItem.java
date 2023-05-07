@@ -54,6 +54,7 @@ public class FoodItem {
     public int getStoredCount() {
         return storedCount;
     }
+
     public void setStoredCount(int storedCount) {
         this.storedCount = storedCount;
     }

@@ -99,7 +99,7 @@ public class FoodsActivity extends AppCompatActivity {
     private void queryData() {
         mItemList.clear();
 
-        mItems.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        mItems.orderBy("name").get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 FoodItem item = documentSnapshot.toObject(FoodItem.class);
                 item.setId(documentSnapshot.getId());
@@ -161,7 +161,7 @@ public class FoodsActivity extends AppCompatActivity {
         } else if (itemId == R.id.daily_intake) {
             Log.d(LOG_TAG, "Daily intake clicked");
             item.getActionView().findViewById(R.id.daily_intake).setOnClickListener(view -> {
-            goToStoredFoods(this);
+                goToStoredFoods(this);
             });
             return true;
         } else {

@@ -2,34 +2,154 @@
     <string name="app_name">Foodoo</string>
 
     <string-array name="food_item_names">
-        <item>Giga alma</item>
-        <item>Gyros</item>
-        <item>Coca cola</item>
-        <item>Banan</item>
-        <item>Juice</item>
+        <!-- Reggeli -->
+        <item>Zabpehely</item>
+        <item>Görög joghurt</item>
+        <item>Tojásrántotta</item>
+        <item>Nutellás pirítós</item>
+        <item>Avokádós pirítós</item>
+        <item>Gyümölcssaláta</item>
+        <item>Smoothie tál</item>
+        <item>Granola tejben</item>
+        <item>Reggeli burrito</item>
+        <item>Angol muffin</item>
+
+        <!-- Ebéd -->
+        <item>Csirkemell saláta</item>
+        <item>Paradicsomos quinoa saláta</item>
+        <item>Grillezett lazac filé, párolt zöldségekkel</item>
+        <item>Pulyka curry zöldséggel</item>
+        <item>Spenótos, feta sajtos csirkemell</item>
+        <item>Tonhal saláta, teljes kiőrlésű kenyérrel</item>
+        <item>Zöldséges kuszkusz saláta</item>
+        <item>Pulyka rizottó zöldségekkel</item>
+        <item>Ropogós csirkeszárnyak, zöldségekkel</item>
+        <item>Indiai Curry, natúr rizzsel</item>
+
+        <!-- Vacsora -->
+        <item>Sütőben sült csirkemell zöldségekkel</item>
+        <item>Brokkolis quinoa saláta</item>
+        <item>Lazac filé tenger gyümölcseivel</item>
+        <item>Ropogós tofu, párolt zöldségekkel</item>
+        <item>Csirkemell spenótos gombával</item>
+        <item>Sült lazac saláta</item>
+        <item>Vegán bolognai spagetti</item>
+        <item>Zöldséges quiche</item>
+        <item>Csirkemell paprikás burgonyával</item>
+        <item>Rizottó spenóttal és gombával</item>
     </string-array>
 
     <string-array name="food_item_calories">
-        <item>200</item>
+        <!-- Reggeli -->
+        <item>120</item>
+        <item>100</item>
+        <item>210</item>
+        <item>240</item>
+        <item>220</item>
+        <item>70</item>
+        <item>250</item>
+        <item>210</item>
         <item>400</item>
-        <item>150</item>
+        <item>250</item>
+
+        <!-- Ebéd -->
         <item>300</item>
-        <item>80</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>400</item>
+        <item>400</item>
+        <item>350</item>
+        <item>500</item>
+        <item>600</item>
+        <item>450</item>
+
+        <!-- Vacsora -->
+        <item>400</item>
+        <item>350</item>
+        <item>400</item>
+        <item>350</item>
+        <item>450</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+        <item>450</item>
     </string-array>
 
     <array name="food_item_rates">
-        <item>3.5</item>
+        <!-- Reggeli -->
+        <item>4</item>
+        <item>5</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
         <item>5</item>
         <item>4</item>
-        <item>1.5</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+
+        <!-- Ebéd -->
         <item>5</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>5</item>
+        <item>3</item>
+        <item>2</item>
+        <item>4</item>
+
+        <!-- Vacsora -->
+        <item>4</item>
+        <item>5</item>
+        <item>4</item>
+        <item>5</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
     </array>
 
     <string-array name="food_item_price">
-        <item>100</item>
-        <item>150</item>
-        <item>500</item>
-        <item>300</item>
-        <item>510</item>
+        <!-- Reggeli -->
+        <item>600</item>
+        <item>450</item>
+        <item>750</item>
+        <item>700</item>
+        <item>1200</item>
+        <item>600</item>
+        <item>1100</item>
+        <item>900</item>
+        <item>1500</item>
+        <item>1000</item>
+
+        <!-- Ebéd -->
+        <item>1400</item>
+        <item>1600</item>
+        <item>2600</item>
+        <item>1900</item>
+        <item>1800</item>
+        <item>1400</item>
+        <item>1200</item>
+        <item>2200</item>
+        <item>1600</item>
+        <item>1650</item>
+
+        <!-- Vacsora -->
+        <item>2200</item>
+        <item>1500</item>
+        <item>3100</item>
+        <item>1700</item>
+        <item>1900</item>
+        <item>2600</item>
+        <item>1500</item>
+        <item>1600</item>
+        <item>2200</item>
+        <item>1900</item>
     </string-array>
 </resources>
