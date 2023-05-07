@@ -34,12 +34,12 @@ public class NotificationHandler {
         this.mManager.createNotificationChannel(channel);
     }
 
-    public void send(String message) {
+    public void send(String title, String message) {
         Intent intent = new Intent(mContext, FoodsActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
-                .setContentTitle("Jelenlegi ételeid: ")
+                .setContentTitle(title)
                 .setContentText(message)
                 .setSmallIcon(R.drawable.baseline_food_bank_24);
 

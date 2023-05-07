@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +48,7 @@ public class FoodsActivity extends AppCompatActivity {
 
     // Notification handler
     private NotificationHandler mNotificationHandler;
+    private JobScheduler mJobScheduler;
 
     private RecyclerView mRecyclerView;
     private ArrayList<FoodItem> mItemList;
@@ -84,6 +88,8 @@ public class FoodsActivity extends AppCompatActivity {
 
         mNotificationHandler = new NotificationHandler(this);
 
+        mJobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        setJobScheduler();
         queryData();
     }
 
@@ -217,7 +223,7 @@ public class FoodsActivity extends AppCompatActivity {
             messageBuilder.setLength(messageBuilder.length() - 2);
         }
 
-        mNotificationHandler.send(messageBuilder.toString());
+        mNotificationHandler.send("Jelenlegi ételeid", messageBuilder.toString());
         queryData();
     }
 
@@ -240,5 +246,17 @@ public class FoodsActivity extends AppCompatActivity {
 
         queryData();
         mNotificationHandler.cancel();
+    }
+
+    private void setJobScheduler() {
+        int networkType = JobInfo.NETWORK_TYPE_UNMETERED;
+        int hardDeadLine = 5000;
+
+        ComponentName name = new ComponentName(getPackageName(), NotificationJobService.class.getName());
+        JobInfo.Builder builder = new JobInfo.Builder(0, name)
+                .setRequiredNetworkType(networkType)
+                .setOverrideDeadline(hardDeadLine);
+
+        mJobScheduler.schedule(builder.build());
     }
 }
