@@ -43,6 +43,9 @@ public class FoodsActivity extends AppCompatActivity {
     private FirebaseFirestore mFirestore;
     private CollectionReference mItems;
 
+    // Notification handler
+    private NotificationHandler mNotificationHandler;
+
     private RecyclerView mRecyclerView;
     private ArrayList<FoodItem> mItemList;
     private FoodItemAdapter mFoodItemAdapter;
@@ -78,6 +81,8 @@ public class FoodsActivity extends AppCompatActivity {
 
         mFirestore = FirebaseFirestore.getInstance();
         mItems = mFirestore.collection("Items");
+
+        mNotificationHandler = new NotificationHandler(this);
 
         queryData();
     }
@@ -201,6 +206,18 @@ public class FoodsActivity extends AppCompatActivity {
                 Toast.makeText(this, item.getName() + " cannot be changed.", Toast.LENGTH_LONG).show();
         });
 
+        StringBuilder messageBuilder = new StringBuilder();
+        for (FoodItem foodItem: mItemList) {
+            if (foodItem.getStoredCount() > 0) {
+                messageBuilder.append(foodItem.getName()).append(" x ").append(foodItem.getStoredCount()).append(", ");
+            }
+        }
+
+        if (messageBuilder.length() > 0) {
+            messageBuilder.setLength(messageBuilder.length() - 2);
+        }
+
+        mNotificationHandler.send(messageBuilder.toString());
         queryData();
     }
 
@@ -222,5 +239,6 @@ public class FoodsActivity extends AppCompatActivity {
         });
 
         queryData();
+        mNotificationHandler.cancel();
     }
 }
