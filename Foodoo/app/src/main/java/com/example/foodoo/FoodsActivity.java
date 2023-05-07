@@ -93,6 +93,15 @@ public class FoodsActivity extends AppCompatActivity {
         queryData();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // cleanup
+        if (mJobScheduler != null) {
+            mJobScheduler.cancelAll();
+        }
+    }
+
     private void queryData() {
         mItemList.clear();
 
