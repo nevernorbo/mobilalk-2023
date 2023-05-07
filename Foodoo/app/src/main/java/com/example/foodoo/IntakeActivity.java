@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,9 +79,31 @@ public class IntakeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Még nem adtál hozzá egy ételt sem az étrendedhez!", Toast.LENGTH_LONG);
                 queryData();
             }
-
+            updateInfo();
             mIntakeItemAdapter.notifyDataSetChanged();
         });
+    }
+
+    public void updateInfo() {
+        int sumCalories = 0;
+        int sumPrice = 0;
+        float sumRating = 0;
+
+        for (FoodItem item : mItemList) {
+            sumCalories += Integer.parseInt(item.getCalories()) * item.getStoredCount();
+            sumPrice += Integer.parseInt(item.getPrice()) * item.getStoredCount();
+            sumRating += item.getRatedInfo();
+        }
+
+        float avgRating = sumRating / mItemList.size();
+
+        TextView caloriesSumTextView = findViewById(R.id.calories_sum_textview);
+        TextView pricesSumTextView = findViewById(R.id.prices_sum_textview);
+        TextView ratingAvgTextView = findViewById(R.id.health_rating_avg_textview);
+
+        caloriesSumTextView.setText("Összkalória: " + sumCalories + " kcal");
+        pricesSumTextView.setText("Pénzösszeg: " + sumPrice + " Ft");
+        ratingAvgTextView.setText("Átlagos tápérték: " + String.format("%.2f", avgRating));
     }
 
 

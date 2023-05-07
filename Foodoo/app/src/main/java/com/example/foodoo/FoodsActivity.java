@@ -98,7 +98,6 @@ public class FoodsActivity extends AppCompatActivity {
 
     private void queryData() {
         mItemList.clear();
-
         mItems.orderBy("name").get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 FoodItem item = documentSnapshot.toObject(FoodItem.class);
@@ -109,6 +108,20 @@ public class FoodsActivity extends AppCompatActivity {
                 initializeData();
                 queryData();
             }
+            int storedItems = 0;
+            for (FoodItem item : mItemList) {
+                if (item.getStoredCount() != 0) {
+                    storedItems += item.getStoredCount();
+                }
+            }
+            dailyIntakeItems = storedItems;
+
+            if (dailyIntakeItems > 0) {
+                countTextView.setText(String.valueOf(dailyIntakeItems));
+            } else {
+                countTextView.setText("");
+            }
+            redCircle.setVisibility((dailyIntakeItems > 0) ? VISIBLE : GONE);
 
             mFoodItemAdapter.notifyDataSetChanged();
         });
